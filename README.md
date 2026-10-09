@@ -18,7 +18,7 @@ Publique projetos, compartilhe esquemas e instruções de montagem, descubra o q
 
 O **Circuito Aberto** é uma rede social voltada para a comunidade maker: um espaço onde estudantes e entusiastas de eletrônica podem publicar seus projetos com Arduino, ESP32, ESP8266 e outras plataformas, incluindo código-fonte, lista de componentes, esquema de montagem e instruções passo a passo.
 
-Desenvolvido como projeto de conclusão de curso (PCC) no **IFRN**.
+Desenvolvido como projeto de conclusão de curso no **IFRN**.
 
 ## ✨ Funcionalidades
 
