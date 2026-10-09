@@ -118,7 +118,7 @@ bash teste_migracao.sh
 
 ## 📚 Mais documentação
 
-Para detalhes técnicos mais profundos — scripts de migração de banco, variáveis de ambiente avançadas, como funciona o sistema de administração — consulte o **[LEIAME.md](LEIAME.md)**.
+Para detalhes técnicos mais profundos — scrips de migração de banco, variáveis de ambiente avançadas, como funciona o sistema de administração — consulte o **[LEIAME.md](LEIAME.md)**.
 
 ## 👥 Equipe
 
@@ -133,5 +133,5 @@ Para detalhes técnicos mais profundos — scripts de migração de banco, vari�
 ---
 
 <div align="center">
-Feito com 💙 por estudantes do IFRN para a comunidade maker brasileira.
+Feito com 💚 por estudantes do IFRN para a comunidade maker brasileira.
 </div>
