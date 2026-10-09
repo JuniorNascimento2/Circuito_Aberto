@@ -1,0 +1,20 @@
+# Dependências
+**/node_modules/
+
+# Variáveis de ambiente (segredos — nunca commitar)
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# Arquivos de SO/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Uploads de desenvolvimento (imagens de perfil/projetos enviadas localmente)
+backend/uploads/*
+!backend/uploads/.gitkeep

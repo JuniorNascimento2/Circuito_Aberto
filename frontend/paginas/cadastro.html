@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar conta — Circuito Aberto</title>
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>somenteVisitante();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div style="display:flex;flex-direction:column;min-height:100vh;">
+    <div id="navegacao-raiz"></div>
+    <main style="flex:1;">
+
+      <div class="auth-wrap page-enter">
+        <div class="card auth-box">
+          <div class="auth-logo-row">
+            <img src="../recursos/logo.png" alt="Circuito Aberto" style="width:40px;height:40px;object-fit:contain;">
+            <span class="auth-logo-text">Circuito Aberto</span>
+          </div>
+          <h1 class="auth-title">Criar conta</h1>
+          <p class="auth-sub">Junte-se à comunidade maker brasileira</p>
+          <form id="cadastro-form">
+            <div class="form-group">
+              <label class="form-label">Nome de usuário</label>
+              <input name="nome_usuario" type="text" class="form-input" placeholder="ex: carlos_maker" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">E-mail</label>
+              <input name="email" type="email" class="form-input" placeholder="seu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Senha</label>
+              <div class="pw-input-wrap">
+                <input name="senha" type="password" class="form-input" placeholder="mínimo 6 caracteres" required style="padding-right:40px;">
+                <button type="button" class="pw-eye-btn" data-toggle-pw><i class="ti ti-eye"></i></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Confirmar senha</label>
+              <div class="pw-input-wrap">
+                <input name="confirmacao" type="password" class="form-input" placeholder="repita a senha" required style="padding-right:40px;">
+                <button type="button" class="pw-eye-btn" data-toggle-pw><i class="ti ti-eye"></i></button>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="cadastro-enviar-btn" style="width:100%;justify-content:center;padding:10px;margin-top:4px;">
+              <i class="ti ti-user-plus"></i> Criar minha conta
+            </button>
+          </form>
+          <p class="auth-switch">Já tem conta? <a href="entrar.html">Entrar</a></p>
+        </div>
+      </div>
+
+
+    </main>
+    <div id="rodape-raiz"></div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/cartao-projeto.js"></script>
+  <script src="../js/barra-navegacao.js"></script>
+  <script src="../js/rodape.js"></script>
+  <script src="../js/paginas/cadastro.js"></script>
+  <script>
+    iniciarBarraNavegacao();
+    iniciarRodape();
+    iniciarPaginaCadastro();
+  </script>
+</body>
+</html>

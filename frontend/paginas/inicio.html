@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Circuito Aberto — Projetos Arduino &amp; ESP32</title>
+  <meta name="description" content="Plataforma para compartilhamento de projetos Arduino e ESP32 da comunidade maker brasileira." />
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>somenteVisitante();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div style="display:flex;flex-direction:column;min-height:100vh;">
+    <div id="navegacao-raiz"></div>
+    <main style="flex:1;">
+
+      <div class="page-enter" id="inicio-raiz">
+        <!-- Destaque -->
+        <div class="landing-hero">
+          <div class="landing-badge"><i class="ti ti-bolt" style="font-size:14px;"></i> Para a comunidade maker brasileira</div>
+          <h1 class="landing-h1">
+            Compartilhe seus projetos<br>
+            <span style="color:var(--green);font-family:var(--mono);">Arduino &amp; ESP32</span>
+          </h1>
+          <p class="landing-lead">
+            Uma plataforma feita por makers, para makers. Publique seus projetos, descubra novas ideias e colabore com a comunidade.
+          </p>
+          <div class="landing-hero-btns">
+            <a href="cadastro.html" class="btn btn-primary" style="font-size:15px;padding:11px 24px;">
+              <i class="ti ti-rocket"></i> Começar agora — é grátis
+            </a>
+            <a href="entrar.html" class="btn btn-outline" style="font-size:15px;padding:11px 24px;">
+              Já tenho conta
+            </a>
+          </div>
+          <!-- Números da plataforma -->
+          <div class="landing-stats" id="inicio-numeros">
+            <div class="landing-stat-item">
+              <div class="landing-stat-num" id="inicio-total-projetos">...</div>
+              <div class="landing-stat-label">Projetos</div>
+            </div>
+            <div class="landing-stat-item">
+              <div class="landing-stat-num" id="inicio-total-makers">...</div>
+              <div class="landing-stat-label">Makers</div>
+            </div>
+            <div class="landing-stat-item">
+              <div class="landing-stat-num" id="inicio-total-copias">...</div>
+              <div class="landing-stat-label">Cópias de código</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Destaques -->
+        <div class="landing-features">
+          <div class="card landing-feature-card">
+            <i class="ti ti-upload landing-feature-icon"></i>
+            <div class="landing-feature-title">Publique seus projetos</div>
+            <div class="landing-feature-desc">Compartilhe imagens, lista de materiais e código completo.</div>
+          </div>
+          <div class="card landing-feature-card">
+            <i class="ti ti-search landing-feature-icon"></i>
+            <div class="landing-feature-title">Descubra e inspire-se</div>
+            <div class="landing-feature-desc">Explore projetos filtrados por plataforma, dificuldade e categoria.</div>
+          </div>
+          <div class="card landing-feature-card">
+            <i class="ti ti-copy landing-feature-icon"></i>
+            <div class="landing-feature-title">Copie e melhore</div>
+            <div class="landing-feature-desc">Faça fork de projetos da comunidade e evolua a ideia original.</div>
+          </div>
+          <div class="card landing-feature-card">
+            <i class="ti ti-users landing-feature-icon"></i>
+            <div class="landing-feature-title">Comunidade maker</div>
+            <div class="landing-feature-desc">Conecte-se com outros entusiastas de Arduino e ESP32 do Brasil.</div>
+          </div>
+        </div>
+
+        <!-- Chamada final -->
+        <div class="landing-cta-wrap">
+          <div class="landing-cta-box">
+            <h2 class="landing-cta-title">Pronto para compartilhar o que você criou?</h2>
+            <p class="landing-cta-desc">Junte-se a centenas de makers que já publicaram seus projetos.</p>
+            <a href="cadastro.html" class="btn btn-primary" style="font-size:15px;padding:11px 28px;">
+              <i class="ti ti-user-plus"></i> Criar conta gratuita
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+    </main>
+    <div id="rodape-raiz"></div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/cartao-projeto.js"></script>
+  <script src="../js/barra-navegacao.js"></script>
+  <script src="../js/rodape.js"></script>
+  <script src="../js/paginas/inicio.js"></script>
+  <script>
+    iniciarBarraNavegacao();
+    iniciarRodape();
+    iniciarPaginaInicio();
+  </script>
+</body>
+</html>

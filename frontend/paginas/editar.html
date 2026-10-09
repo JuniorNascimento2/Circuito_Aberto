@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Editar projeto — Circuito Aberto</title>
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>exigirLogin();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div style="display:flex;flex-direction:column;min-height:100vh;">
+    <div id="navegacao-raiz"></div>
+    <main style="flex:1;">
+
+      <div class="page-container-sm page-enter">
+        <div class="submit-header">
+          <h1 class="submit-title" id="publicar-titulo-pagina">Publicar novo projeto</h1>
+          <p class="submit-sub">Compartilhe seu projeto com a comunidade maker</p>
+        </div>
+
+        <form class="submit-form" id="publicar-form">
+          <div class="form-group">
+            <label class="form-label">Título do projeto *</label>
+            <input name="titulo" type="text" class="form-input" placeholder="Ex: Semáforo automático com Arduino" maxlength="200" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group" style="flex:1;">
+              <label class="form-label">Plataforma *</label>
+              <div class="submit-chips" id="publicar-chips-plataforma">
+                <button type="button" class="submit-chip submit-chip-active" data-plataforma="Arduino Uno">Arduino Uno</button>
+                <button type="button" class="submit-chip" data-plataforma="Arduino Mega">Arduino Mega</button>
+                <button type="button" class="submit-chip" data-plataforma="Arduino Nano">Arduino Nano</button>
+                <button type="button" class="submit-chip" data-plataforma="ESP32">ESP32</button>
+                <button type="button" class="submit-chip" data-plataforma="ESP8266">ESP8266</button>
+              </div>
+            </div>
+            <div class="form-group" style="flex:1;">
+              <label class="form-label">Dificuldade</label>
+              <div class="submit-chips" id="publicar-chips-dificuldade">
+                <button type="button" class="submit-chip submit-chip-active" data-dificuldade="Iniciante">Iniciante</button>
+                <button type="button" class="submit-chip" data-dificuldade="Intermediário">Intermediário</button>
+                <button type="button" class="submit-chip" data-dificuldade="Avançado">Avançado</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Foto ou imagem do projeto</label>
+            <label class="submit-upload-zone" id="publicar-envio-zona">
+              <div class="submit-upload-inner" id="publicar-envio-interno">
+                <i class="ti ti-photo-up submit-upload-icon"></i>
+                <span class="submit-upload-text">Clique para enviar uma imagem ou print</span>
+                <span class="submit-upload-hint">PNG, JPG, WEBP até 10MB</span>
+              </div>
+              <img id="publicar-previa-img" class="submit-preview-img hidden" alt="prévia">
+              <input type="file" accept="image/*" style="display:none;" id="publicar-imagem-campo">
+            </label>
+            <button type="button" class="btn btn-ghost btn-sm mt-16 hidden" id="publicar-remover-imagem-btn">
+              <i class="ti ti-x"></i> Remover imagem
+            </button>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Descrição do funcionamento *</label>
+            <textarea name="descricao" class="form-input" style="min-height:120px;" placeholder="Explique como o projeto funciona, o que ele faz e como foi construído..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Materiais utilizados</label>
+            <textarea name="materiais" class="form-input" style="min-height:100px;" placeholder="1x Arduino Uno&#10;2x LED vermelho&#10;3x Resistor 220Ω"></textarea>
+            <span class="submit-hint">Uma linha por material</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiquetas<span class="submit-label-hint">(máx. 10 · facilita a busca)</span></label>
+            <div class="tag-input-wrap" id="etiquetas-area">
+              <input class="tag-input-field" id="etiquetas-campo" placeholder="Digite e pressione Enter ou vírgula...">
+            </div>
+            <span class="submit-hint">Ex: dht22, sensor, temperatura, display-oled</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Instruções de montagem<span class="submit-label-hint">(opcional · como conectar os componentes)</span></label>
+            <textarea name="montagem" class="form-input" style="min-height:120px;" placeholder="1. Conecte o VCC do sensor ao pino 5V do Arduino&#10;2. Conecte o GND ao GND&#10;3. Conecte o pino de sinal ao pino digital 7"></textarea>
+            <span class="submit-hint">Uma linha por passo — vira uma lista numerada na página do projeto</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Código-fonte<span class="submit-label-hint">(opcional)</span></label>
+            <textarea name="codigo" class="form-input" style="min-height:180px;font-family:var(--mono);font-size:13px;" placeholder="Cole o código do seu projeto aqui..."></textarea>
+          </div>
+
+          <div class="submit-actions-row">
+            <button type="submit" class="btn btn-primary" id="publicar-enviar-btn" style="flex:1;justify-content:center;padding:12px;">
+              <i class="ti ti-send"></i> Publicar projeto
+            </button>
+            <button type="button" class="btn btn-outline" id="publicar-cancelar-btn">Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+
+    </main>
+    <div id="rodape-raiz"></div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/cartao-projeto.js"></script>
+  <script src="../js/barra-navegacao.js"></script>
+  <script src="../js/rodape.js"></script>
+  <script src="../js/paginas/publicar.js"></script>
+  <script>
+    iniciarBarraNavegacao();
+    iniciarRodape();
+    iniciarPaginaPublicar();
+  </script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+/* =============================================================================
+   Painel administrativo — layout de sidebar exclusivo desta página.
+   Não usado em nenhuma outra tela do site; não sobrescreve nada de estilo.css,
+   só soma variáveis e classes novas (prefixo admin-).
+   ============================================================================= */
+
+:root {
+  --admin-accent: #8b7cf6;
+  --admin-accent-dim: rgba(139, 124, 246, 0.14);
+  --admin-accent-border: rgba(139, 124, 246, 0.35);
+}
+
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+/* ── Sidebar ── */
+.admin-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 14px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-sidebar-top {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.admin-sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.admin-sidebar-logo i { color: var(--green); font-size: 16px; }
+
+.admin-mode-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--admin-accent-dim);
+  color: var(--admin-accent);
+  border: 1px solid var(--admin-accent-border);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.admin-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 10px;
+  border-radius: var(--radius);
+  font-size: 13.5px;
+  color: var(--text2);
+  transition: background 0.15s, color 0.15s;
+}
+
+.admin-nav-item i { font-size: 17px; flex-shrink: 0; }
+
+.admin-nav-item:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.admin-nav-item-active {
+  background: var(--admin-accent-dim);
+  color: var(--admin-accent);
+  font-weight: 600;
+}
+
+.admin-nav-badge {
+  margin-left: auto;
+  background: #f07070;
+  color: #2c0d0d;
+  font-size: 10.5px;
+  font-weight: 700;
+  min-width: 17px;
+  height: 17px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5px;
+}
+
+.admin-sidebar-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.admin-sidebar-user {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 2px 10px;
+}
+
+.admin-sidebar-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--admin-accent-dim);
+  color: var(--admin-accent);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.admin-sidebar-user-nome {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-sidebar-user-papel {
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.admin-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: var(--radius);
+  font-size: 12.5px;
+  color: var(--text2);
+  background: none;
+  border: none;
+  text-align: left;
+  width: 100%;
+}
+
+.admin-sidebar-link:hover { background: var(--bg3); color: var(--text); }
+.admin-sidebar-link-danger:hover { color: #f07070; }
+
+/* ── Conteúdo principal ── */
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  padding: 28px 36px 60px;
+}
+
+.admin-main #admin-visao-geral,
+.admin-main .admin-section {
+  scroll-margin-top: 20px;
+}
+
+/* ── Responsivo: sidebar vira barra superior ── */
+@media (max-width: 860px) {
+  .admin-shell { flex-direction: column; }
+
+  /* Nada de rolagem horizontal escondida aqui: a sidebar vira uma barra
+     compacta no topo, com os itens de navegação quebrando linha — assim
+     nenhuma seção (ex: Denúncias, Log de auditoria) fica escondida atrás
+     de uma rolagem que o usuário pode nem perceber que existe. */
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .admin-sidebar-top {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+    gap: 10px;
+  }
+
+  .admin-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .admin-nav-item {
+    padding: 6px 10px;
+    font-size: 12.5px;
+  }
+
+  .admin-sidebar-footer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 0;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  .admin-sidebar-user { padding: 0; margin-right: auto; }
+  .admin-sidebar-user-nome, .admin-sidebar-user-papel { display: none; }
+  .admin-sidebar-link span { display: none; }
+
+  .admin-main { padding: 20px 16px 50px; }
+}
+
+@media (max-width: 400px) {
+  /* Celular bem estreito: até o badge "Modo administrador" some, só o
+     ícone de escudo fica — o essencial (nome do site + navegação) continua
+     visível e nada precisa de rolagem escondida pra aparecer. */
+  .admin-mode-badge span { display: none; }
+  .admin-mode-badge { padding: 6px 8px; }
+}

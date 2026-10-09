@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel admin — Circuito Aberto</title>
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>exigirLogin();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div class="admin-shell">
+    <aside class="admin-sidebar" id="admin-sidebar">
+      <div class="admin-sidebar-top">
+        <a href="explorar.html" class="admin-sidebar-logo"><img src="../recursos/logo.png" alt="Circuito Aberto" style="width:22px;height:22px;object-fit:contain;"> Circuito Aberto</a>
+        <div class="admin-mode-badge"><i class="ti ti-shield-check"></i> <span>Modo administrador</span></div>
+      </div>
+
+      <nav class="admin-nav">
+        <a href="#admin-visao-geral" class="admin-nav-item admin-nav-item-active" data-secao="visao-geral"><i class="ti ti-layout-dashboard"></i> Visão geral</a>
+        <a href="#admin-usuarios" class="admin-nav-item" data-secao="usuarios"><i class="ti ti-users"></i> Usuários</a>
+        <a href="#admin-projetos" class="admin-nav-item" data-secao="projetos"><i class="ti ti-layout-grid"></i> Projetos</a>
+        <a href="#admin-denuncias" class="admin-nav-item" data-secao="denuncias">
+          <i class="ti ti-flag"></i> Denúncias
+          <span class="admin-nav-badge hidden" id="admin-nav-denuncias-contador"></span>
+        </a>
+        <a href="#admin-logs" class="admin-nav-item" data-secao="logs"><i class="ti ti-history"></i> Log de auditoria</a>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-sidebar-user" id="admin-sidebar-usuario"></div>
+        <a href="explorar.html" class="admin-sidebar-link"><i class="ti ti-arrow-left"></i> <span>Voltar ao site</span></a>
+        <button class="admin-sidebar-link admin-sidebar-link-danger" id="admin-sair-btn"><i class="ti ti-logout"></i> Sair</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="page-enter" id="admin-raiz">
+
+        <div id="admin-visao-geral">
+          <div class="stats-header">
+            <h1 class="stats-title"><i class="ti ti-shield-lock"></i>Visão geral</h1>
+            <p class="stats-sub">Resumo da plataforma e moderação</p>
+          </div>
+          <div class="stats-grid" id="admin-estatisticas"></div>
+        </div>
+
+        <!-- ── Usuários ── -->
+        <div class="admin-section" id="admin-usuarios">
+          <div class="admin-section-header">
+            <h2 class="stats-sec-title" style="margin:0;"><i class="ti ti-users"></i> Usuários</h2>
+            <input id="admin-usuarios-busca" class="form-input admin-search-input" placeholder="Buscar por nome ou e-mail...">
+          </div>
+          <div class="card">
+            <div class="center-spinner" id="admin-usuarios-carregando"><div class="spinner" style="width:32px;height:32px;"></div></div>
+            <div id="admin-usuarios-tabela" style="overflow-x:auto;"></div>
+          </div>
+          <div class="admin-pagination" id="admin-usuarios-paginacao"></div>
+        </div>
+
+        <!-- ── Projetos ── -->
+        <div class="admin-section" id="admin-projetos">
+          <div class="admin-section-header">
+            <h2 class="stats-sec-title" style="margin:0;"><i class="ti ti-layout-grid"></i> Projetos</h2>
+            <input id="admin-projetos-busca" class="form-input admin-search-input" placeholder="Buscar projeto...">
+          </div>
+          <div class="card">
+            <div class="center-spinner" id="admin-projetos-carregando"><div class="spinner" style="width:32px;height:32px;"></div></div>
+            <div id="admin-projetos-tabela" style="overflow-x:auto;"></div>
+          </div>
+        </div>
+
+        <!-- ── Denúncias ── -->
+        <div class="admin-section" id="admin-denuncias">
+          <div class="admin-section-header">
+            <h2 class="stats-sec-title" style="margin:0;"><i class="ti ti-flag"></i> Denúncias</h2>
+            <div class="submit-chips" id="admin-denuncias-status-chips">
+              <button type="button" class="submit-chip submit-chip-active" data-status="pendente">Pendentes</button>
+              <button type="button" class="submit-chip" data-status="resolvida">Resolvidas</button>
+              <button type="button" class="submit-chip" data-status="ignorada">Ignoradas</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="center-spinner" id="admin-denuncias-carregando"><div class="spinner" style="width:32px;height:32px;"></div></div>
+            <div id="admin-denuncias-tabela" style="overflow-x:auto;"></div>
+          </div>
+          <div class="admin-pagination" id="admin-denuncias-paginacao"></div>
+        </div>
+
+        <!-- ── Log de auditoria ── -->
+        <div class="admin-section" id="admin-logs">
+          <div class="admin-section-header">
+            <h2 class="stats-sec-title" style="margin:0;"><i class="ti ti-history"></i> Log de auditoria</h2>
+          </div>
+          <div class="card">
+            <div class="center-spinner" id="admin-logs-carregando"><div class="spinner" style="width:32px;height:32px;"></div></div>
+            <div id="admin-logs-tabela" style="overflow-x:auto;"></div>
+          </div>
+          <div class="admin-pagination" id="admin-logs-paginacao"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ── Modal: banir usuário ── -->
+  <div class="admin-modal-overlay hidden" id="admin-ban-modal-overlay">
+    <div class="card admin-modal">
+      <h3 class="admin-modal-title"><i class="ti ti-ban"></i> Banir usuário</h3>
+      <p class="admin-modal-user" id="admin-ban-modal-usuario"></p>
+
+      <div class="form-group">
+        <label class="form-label">Motivo do banimento *</label>
+        <textarea id="admin-ban-motivo" class="form-input" style="min-height:90px;" maxlength="500" placeholder="Ex: comentário ofensivo na publicação &quot;Semáforo com Arduino&quot;"></textarea>
+        <span class="submit-hint" id="admin-ban-motivo-contador">0/500</span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Duração</label>
+        <div class="submit-chips" id="admin-ban-duracao-chips">
+          <button type="button" class="submit-chip submit-chip-active" data-dias="">Permanente</button>
+          <button type="button" class="submit-chip" data-dias="1">1 dia</button>
+          <button type="button" class="submit-chip" data-dias="3">3 dias</button>
+          <button type="button" class="submit-chip" data-dias="7">7 dias</button>
+          <button type="button" class="submit-chip" data-dias="30">30 dias</button>
+          <button type="button" class="submit-chip" data-dias="custom">Outro</button>
+        </div>
+        <input type="number" id="admin-ban-dias-custom" class="form-input hidden" min="1" step="1" placeholder="Número de dias" style="margin-top:8px;">
+      </div>
+
+      <div class="submit-actions-row">
+        <button class="btn btn-danger" id="admin-ban-confirmar-btn" style="flex:1;justify-content:center;">
+          <i class="ti ti-ban"></i> Confirmar banimento
+        </button>
+        <button class="btn btn-outline" id="admin-ban-cancelar-btn">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/paginas/admin.js"></script>
+  <script>
+    iniciarPaginaAdmin();
+  </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto — Circuito Aberto</title>
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+
+  <!-- Prism.js (realce de sintaxe do bloco de código) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prism-themes@1.9.0/themes/prism-vsc-dark-plus.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>exigirLogin();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div style="display:flex;flex-direction:column;min-height:100vh;">
+    <div id="navegacao-raiz"></div>
+    <main style="flex:1;">
+
+      <div class="center-spinner-lg" id="detalhe-carregando"><div class="spinner" style="width:40px;height:40px;"></div></div>
+
+      <div class="page-container page-enter hidden" id="detalhe-raiz">
+        <button class="btn btn-ghost btn-sm" style="margin-bottom:20px;" id="detalhe-voltar-btn">
+          <i class="ti ti-arrow-left"></i> Voltar
+        </button>
+
+        <div class="detail-layout">
+          <!-- ── COLUNA PRINCIPAL ── -->
+          <div id="detalhe-principal" style="display:flex;flex-direction:column;gap:16px;min-width:0;"></div>
+          <!-- ── COLUNA LATERAL ── -->
+          <aside id="detalhe-lateral" style="display:flex;flex-direction:column;gap:16px;min-width:0;"></aside>
+        </div>
+      </div>
+
+      <!-- ── Modal: denunciar projeto ou comentário ── -->
+      <div class="admin-modal-overlay hidden" id="denuncia-modal-overlay">
+        <div class="card admin-modal">
+          <h3 class="admin-modal-title"><i class="ti ti-flag"></i> Denunciar conteúdo</h3>
+          <p class="admin-modal-user" id="denuncia-modal-alvo"></p>
+
+          <div class="form-group">
+            <label class="form-label">Motivo *</label>
+            <textarea id="denuncia-motivo" class="form-input" style="min-height:90px;" maxlength="500" placeholder="Explique por que este conteúdo deve ser analisado pela equipe"></textarea>
+            <span class="submit-hint" id="denuncia-motivo-contador">0/500</span>
+          </div>
+
+          <div class="submit-actions-row">
+            <button class="btn btn-danger" id="denuncia-confirmar-btn" style="flex:1;justify-content:center;">
+              <i class="ti ti-flag"></i> Enviar denúncia
+            </button>
+            <button class="btn btn-outline" id="denuncia-cancelar-btn">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+    <div id="rodape-raiz"></div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/cartao-projeto.js"></script>
+  <script src="../js/barra-navegacao.js"></script>
+  <script src="../js/rodape.js"></script>
+
+  <!-- Prism.js: núcleo + plugin usado pelo bloco de código -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+  <script src="../js/bloco-codigo.js"></script>
+
+  <script src="../js/paginas/projeto.js"></script>
+  <script>
+    iniciarBarraNavegacao();
+    iniciarRodape();
+    iniciarPaginaProjeto();
+  </script>
+</body>
+</html>

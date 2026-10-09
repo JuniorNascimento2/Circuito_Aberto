@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projetos salvos — Circuito Aberto</title>
+  <meta name="theme-color" content="#1a9e72" />
+
+  <link rel="icon" type="image/x-icon" href="../recursos/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../recursos/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="../recursos/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="../recursos/icon-512.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+  <script src="../js/sessao.js"></script>
+  <script src="../js/protecao.js"></script>
+  <script>exigirLogin();</script>
+  <script src="../js/captura-erros.js"></script>
+
+  <div style="display:flex;flex-direction:column;min-height:100vh;">
+    <div id="navegacao-raiz"></div>
+    <main style="flex:1;">
+
+      <div class="page-container page-enter">
+        <div class="saved-header">
+          <h1 class="saved-title"><i class="ti ti-bookmark"></i>Projetos salvos</h1>
+          <p class="saved-sub" id="salvos-subtitulo">0 projetos salvos</p>
+        </div>
+
+        <div class="center-spinner" id="salvos-carregando"><div class="spinner" style="width:40px;height:40px;"></div></div>
+        <div class="empty hidden" id="salvos-vazio">
+          <i class="ti ti-bookmark-off"></i>
+          <p>Você ainda não salvou nenhum projeto.</p>
+          <a href="explorar.html" class="btn btn-primary" style="margin-top:16px;">
+            <i class="ti ti-layout-grid"></i> Explorar projetos
+          </a>
+        </div>
+        <div class="projects-grid hidden" id="salvos-grade"></div>
+      </div>
+
+
+    </main>
+    <div id="rodape-raiz"></div>
+  </div>
+
+  <script src="../js/utilitarios.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/aviso.js"></script>
+  <script src="../js/confirmacao.js"></script>
+  <script src="../js/cartao-projeto.js"></script>
+  <script src="../js/barra-navegacao.js"></script>
+  <script src="../js/rodape.js"></script>
+  <script src="../js/paginas/salvos.js"></script>
+  <script>
+    iniciarBarraNavegacao();
+    iniciarRodape();
+    iniciarPaginaSalvos();
+  </script>
+</body>
+</html>
