@@ -18,7 +18,7 @@ Publique projetos, compartilhe esquemas e instruções de montagem, descubra o q
 
 O **Circuito Aberto** é uma rede social voltada para a comunidade maker: um espaço onde estudantes e entusiastas de eletrônica podem publicar seus projetos com Arduino, ESP32, ESP8266 e outras plataformas, incluindo código-fonte, lista de componentes, esquema de montagem e instruções passo a passo.
 
-Desenvolvido como projeto de conclusão de curso (PCC) no **IFRN**.
+Desenvolvido como projeto de conclusão de curso no **IFRN**.
 
 ## ✨ Funcionalidades
 
@@ -118,7 +118,7 @@ bash teste_migracao.sh
 
 ## 📚 Mais documentação
 
-Para detalhes técnicos mais profundos — scripts de migração de banco, variáveis de ambiente avançadas, como funciona o sistema de administração — consulte o **[LEIAME.md](LEIAME.md)**.
+Para detalhes técnicos mais profundos — scrips de migração de banco, variáveis de ambiente avançadas, como funciona o sistema de administração — consulte o **[LEIAME.md](LEIAME.md)**.
 
 ## 👥 Equipe
 
@@ -133,5 +133,5 @@ Para detalhes técnicos mais profundos — scripts de migração de banco, vari�
 ---
 
 <div align="center">
-Feito com 💙 por estudantes do IFRN para a comunidade maker brasileira.
+Feito com 💚 por estudantes do IFRN para a comunidade maker brasileira.
 </div>
