@@ -1628,10 +1628,6 @@ textarea.form-input {
   color: var(--text2);
 }
 
-.footer-nav-list .footer-link:hover{
-  color: var(--green);
-}
-
 /* Barra inferior: copyright + selos + voltar ao topo */
 .footer-bottom {
   max-width: 1100px;
@@ -2395,9 +2391,16 @@ textarea.form-input {
 
 .submit-preview-img {
   width: 100%;
-  max-height: 300px;
+  aspect-ratio: 16 / 9; /* mesma proporção em que a foto aparece no site */
   object-fit: cover;
   display: block;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+.submit-preview-img.arrastando {
+  cursor: grabbing;
 }
 
 .submit-hint {

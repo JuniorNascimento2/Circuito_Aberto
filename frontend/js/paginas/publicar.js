@@ -58,29 +58,125 @@ function iniciarPaginaPublicar() {
     });
   }
 
-  // ── Envio de imagem ─────────────────────────────────────────────────────────
+  // ── Envio de imagem + ajuste de enquadramento ──────────────────────────────
+  // A foto aparece no site em proporção 16:9 (card e página do projeto).
+  // O usuário arrasta a prévia pra escolher o enquadramento; ao salvar, o
+  // navegador recorta a imagem nessa posição e envia o recorte (sem alterar
+  // o backend nem o banco de dados).
+  const PROPORCAO = 16 / 9;
+  const LARGURA_MAXIMA_SAIDA = 1280;
+  let posicao = { x: 0.5, y: 0.5 }; // 0 = início, 1 = fim da imagem
+  let ajustouEnquadramento = false;
+
+  const dicaAjuste = document.createElement('span');
+  dicaAjuste.className = 'submit-hint hidden';
+  dicaAjuste.textContent = 'Arraste a imagem para ajustar o enquadramento. Para trocar a foto, remova e envie outra.';
+  botaoRemoverImagem.parentNode.insertBefore(dicaAjuste, botaoRemoverImagem);
+
   campoImagem.addEventListener('change', (evento) => {
     const arquivo = evento.target.files[0];
     if (!arquivo) return;
     arquivoImagem = arquivo;
+    posicao = { x: 0.5, y: 0.5 };
+    ajustouEnquadramento = false;
     mostrarPrevia(URL.createObjectURL(arquivo));
   });
 
+  function aplicarPosicao() {
+    previaImagem.style.objectPosition = `${posicao.x * 100}% ${posicao.y * 100}%`;
+  }
+
   function mostrarPrevia(url) {
     previaImagem.src = url;
+    aplicarPosicao();
     previaImagem.classList.remove('hidden');
     areaEnvioInterna.classList.add('hidden');
     botaoRemoverImagem.classList.remove('hidden');
+    dicaAjuste.classList.remove('hidden');
   }
 
   botaoRemoverImagem.addEventListener('click', (evento) => {
     evento.preventDefault();
     arquivoImagem = null;
+    ajustouEnquadramento = false;
+    posicao = { x: 0.5, y: 0.5 };
     previaImagem.src = '';
     previaImagem.classList.add('hidden');
     areaEnvioInterna.classList.remove('hidden');
     botaoRemoverImagem.classList.add('hidden');
+    dicaAjuste.classList.add('hidden');
+    campoImagem.value = '';
   });
+
+  // Com a prévia visível, clicar/arrastar na imagem não abre o seletor de arquivo.
+  previaImagem.addEventListener('click', (evento) => evento.preventDefault());
+
+  // Arrastar a imagem pra mudar a parte que aparece
+  let arraste = null;
+  previaImagem.addEventListener('pointerdown', (evento) => {
+    if (!previaImagem.naturalWidth) return;
+    arraste = { x: evento.clientX, y: evento.clientY, inicio: { ...posicao } };
+    previaImagem.setPointerCapture(evento.pointerId);
+    previaImagem.classList.add('arrastando');
+  });
+  previaImagem.addEventListener('pointermove', (evento) => {
+    if (!arraste) return;
+    const quadro = previaImagem.getBoundingClientRect();
+    const escala = Math.max(quadro.width / previaImagem.naturalWidth, quadro.height / previaImagem.naturalHeight);
+    const sobraX = previaImagem.naturalWidth * escala - quadro.width;
+    const sobraY = previaImagem.naturalHeight * escala - quadro.height;
+    const limitar = (v) => Math.min(1, Math.max(0, v));
+    // arrastar pra direita/baixo mostra mais do começo (esquerda/topo) da imagem
+    if (sobraX > 0.5) posicao.x = limitar(arraste.inicio.x - (evento.clientX - arraste.x) / sobraX);
+    if (sobraY > 0.5) posicao.y = limitar(arraste.inicio.y - (evento.clientY - arraste.y) / sobraY);
+    ajustouEnquadramento = true;
+    aplicarPosicao();
+  });
+  const soltarArraste = (evento) => {
+    if (!arraste) return;
+    arraste = null;
+    previaImagem.classList.remove('arrastando');
+    if (previaImagem.hasPointerCapture(evento.pointerId)) previaImagem.releasePointerCapture(evento.pointerId);
+  };
+  previaImagem.addEventListener('pointerup', soltarArraste);
+  previaImagem.addEventListener('pointercancel', soltarArraste);
+
+  // Gera o arquivo recortado (16:9) na posição escolhida. Se algo falhar, cai
+  // no arquivo original. GIF/SVG são enviados sem recorte (preserva animação/vetor).
+  function gerarImagemRecortada() {
+    return new Promise((resolve) => {
+      const original = arquivoImagem;
+      if (original && /gif|svg/i.test(original.type)) return resolve(original);
+      if (!original && !ajustouEnquadramento) return resolve(null); // edição sem mudança: mantém a imagem atual
+      const largura = previaImagem.naturalWidth;
+      const altura = previaImagem.naturalHeight;
+      if (!largura || !altura) return resolve(original);
+
+      let sw, sh, sx, sy;
+      if (largura / altura > PROPORCAO) { // mais larga que 16:9: sobra nas laterais
+        sh = altura; sw = altura * PROPORCAO; sy = 0; sx = (largura - sw) * posicao.x;
+      } else {                            // mais alta que 16:9: sobra em cima/embaixo
+        sw = largura; sh = largura / PROPORCAO; sx = 0; sy = (altura - sh) * posicao.y;
+      }
+      const saidaL = Math.round(Math.min(LARGURA_MAXIMA_SAIDA, sw));
+      const saidaA = Math.round(saidaL / PROPORCAO);
+      const tela = document.createElement('canvas');
+      tela.width = saidaL;
+      tela.height = saidaA;
+      const ctx = tela.getContext('2d');
+      ctx.fillStyle = '#17171c';
+      ctx.fillRect(0, 0, saidaL, saidaA);
+      try {
+        ctx.drawImage(previaImagem, sx, sy, sw, sh, 0, 0, saidaL, saidaA);
+        tela.toBlob((blob) => {
+          if (!blob) return resolve(original);
+          resolve(new File([blob], 'projeto.jpg', { type: 'image/jpeg' }));
+        }, 'image/jpeg', 0.9);
+      } catch {
+        resolve(original);
+      }
+    });
+  }
 
   // ── Etiquetas ───────────────────────────────────────────────────────────────
   const areaEtiquetas  = document.getElementById('etiquetas-area');
@@ -177,7 +273,8 @@ function iniciarPaginaPublicar() {
     campos.append('montagem', campoMontagem.value);
     campos.append('codigo', campoCodigo.value);
     campos.append('etiquetas', JSON.stringify(etiquetas));
-    if (arquivoImagem) campos.append('imagem', arquivoImagem);
+    const imagemFinal = await gerarImagemRecortada();
+    if (imagemFinal) campos.append('imagem', imagemFinal);
 
     try {
       if (ehEdicao) {
